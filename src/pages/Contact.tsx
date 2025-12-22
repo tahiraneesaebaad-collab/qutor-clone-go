@@ -53,8 +53,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "info@quranlearn.com",
-      link: "mailto:info@quranlearn.com",
+      content: "info@quranacademy.com",
+      link: "mailto:info@quranacademy.com",
       description: "For detailed inquiries",
     },
     {
@@ -74,10 +74,13 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact Us | Get in Touch | QuranLearn</title>
-        <meta name="description" content="Contact QuranLearn for online Quran classes. Reach us on WhatsApp +92 333 413 6071. Available 24/7 for your inquiries." />
-        <meta name="keywords" content="contact quran tutor, quran classes inquiry, online quran teacher contact" />
-        <link rel="canonical" href="https://quranlearn.com/contact" />
+        <title>Contact Us | Get in Touch | QuranAcademy</title>
+        <meta name="description" content="Contact QuranAcademy for online Quran classes. Reach us on WhatsApp +92 333 413 6071. Available 24/7 for your inquiries about Noorani Qaida, Tajweed, Hifz courses." />
+        <meta name="keywords" content="contact quran tutor, quran classes inquiry, online quran teacher contact, quran academy contact" />
+        <link rel="canonical" href="https://quranacademy.com/contact" />
+        <meta property="og:title" content="Contact QuranAcademy | 24/7 Support" />
+        <meta property="og:description" content="Get in touch for online Quran classes. WhatsApp: +92 333 413 6071" />
+        <meta property="og:url" content="https://quranacademy.com/contact" />
       </Helmet>
 
       <Navbar />
@@ -105,7 +108,7 @@ const Contact = () => {
                   Contact Information
                 </h2>
                 <p className="text-muted-foreground mb-8">
-                  We appreciate your interest in QuranLearn. Whether you're looking to enroll, 
+                  We appreciate your interest in QuranAcademy. Whether you're looking to enroll, 
                   have questions about our courses, or need support, we're here to help.
                 </p>
 

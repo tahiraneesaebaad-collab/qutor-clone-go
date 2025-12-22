@@ -82,10 +82,13 @@ const Pricing = () => {
   return (
     <>
       <Helmet>
-        <title>Pricing | Affordable Online Quran Classes | QuranLearn</title>
-        <meta name="description" content="Affordable online Quran learning packages. Choose from Basic, Standard, Premium, or Intensive plans. Free trial available. Flexible payment options." />
-        <meta name="keywords" content="quran classes price, online quran tutor fees, affordable quran learning, hifz program cost" />
-        <link rel="canonical" href="https://quranlearn.com/pricing" />
+        <title>Pricing | Affordable Online Quran Classes | QuranAcademy</title>
+        <meta name="description" content="Affordable online Quran learning packages starting from $25/month. Choose from Basic, Standard, Premium, or Intensive plans. Free trial available. Noorani Qaida, Tajweed, Hifz courses." />
+        <meta name="keywords" content="quran classes price, online quran tutor fees, affordable quran learning, hifz program cost, noorani qaida course price, tajweed course fees" />
+        <link rel="canonical" href="https://quranacademy.com/pricing" />
+        <meta property="og:title" content="Affordable Online Quran Classes | Pricing | QuranAcademy" />
+        <meta property="og:description" content="Online Quran learning packages starting from $25/month. Free trial lesson included!" />
+        <meta property="og:url" content="https://quranacademy.com/pricing" />
       </Helmet>
 
       <Navbar />

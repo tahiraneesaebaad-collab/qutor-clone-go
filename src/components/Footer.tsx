@@ -11,10 +11,8 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-full bg-primary-foreground flex items-center justify-center">
-                <span className="text-primary font-heading font-bold text-xl">Q</span>
-              </div>
-              <span className="font-heading font-bold text-xl">QuranLearn</span>
+              <img src="/logo.png" alt="QuranAcademy Logo" className="w-10 h-10 object-contain" />
+              <span className="font-heading font-bold text-xl">QuranAcademy</span>
             </Link>
             <p className="text-primary-foreground/80 mb-6">
               Learn Quran online from certified tutors. Flexible schedules, personalized lessons,
@@ -74,22 +72,27 @@ const Footer = () => {
             <h3 className="font-heading font-semibold text-lg mb-4">Our Courses</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/courses/recitation" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/courses#norani-qaida" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                  Noorani Qaida
+                </Link>
+              </li>
+              <li>
+                <Link to="/courses#recitation" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   Quran Recitation
                 </Link>
               </li>
               <li>
-                <Link to="/courses/arabic" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/courses#arabic" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   Arabic Language
                 </Link>
               </li>
               <li>
-                <Link to="/courses/hifz" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/courses#hifz" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   Hifz (Memorization)
                 </Link>
               </li>
               <li>
-                <Link to="/courses/tajweed" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/courses#tajweed" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   Tajweed Rules
                 </Link>
               </li>
@@ -116,8 +119,8 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                <a href="mailto:info@quranlearn.com" className="text-primary-foreground/80 hover:text-primary-foreground">
-                  info@quranlearn.com
+                <a href="mailto:info@quranacademy.com" className="text-primary-foreground/80 hover:text-primary-foreground">
+                  info@quranacademy.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
@@ -131,7 +134,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/20 mt-12 pt-8 text-center text-primary-foreground/60">
-          <p>© {currentYear} QuranLearn. All rights reserved.</p>
+          <p>© {currentYear} QuranAcademy. All rights reserved. | Learn Quran Online with Expert Tutors</p>
         </div>
       </div>
     </footer>

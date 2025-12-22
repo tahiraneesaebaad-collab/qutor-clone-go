@@ -16,14 +16,17 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <div className="text-primary-foreground">
+            <span className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-medium mb-4 animate-fade-in">
+              🌟 Trusted by 10,000+ Students Worldwide
+            </span>
             <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
-              Learn Quran Online
+              Learn Quran Online with QuranAcademy
             </h1>
             <p className="text-xl sm:text-2xl text-primary-foreground/90 mb-4 animate-fade-in" style={{ animationDelay: "100ms" }}>
               Your rate, Your time, Your choice.
             </p>
             <p className="text-lg text-primary-foreground/80 mb-8 max-w-lg animate-fade-in" style={{ animationDelay: "200ms" }}>
-              Online Quran classes for Tajweed, Hifz, and Arabic. Learn from expert tutors 
+              Online Quran classes for Noorani Qaida, Tajweed, Hifz, and Arabic. Learn from expert certified tutors 
               at your own pace with personalized one-on-one lessons.
             </p>
             
@@ -52,8 +55,9 @@ const HeroSection = () => {
             <div className="relative z-10 animate-float">
               <img
                 src={heroImage}
-                alt="Learn Quran online on laptop and tablet"
+                alt="Learn Quran online with QuranAcademy - Noorani Qaida, Tajweed, Hifz courses on laptop and tablet"
                 className="w-full max-w-xl mx-auto rounded-2xl shadow-2xl"
+                loading="eager"
               />
             </div>
             {/* Decorative elements */}
