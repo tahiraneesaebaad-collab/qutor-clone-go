@@ -18,6 +18,7 @@ const Navbar = () => {
   ];
 
   const courseLinks = [
+    { path: "/courses/norani-qaida", label: "Noorani Qaida" },
     { path: "/courses/recitation", label: "Quran Recitation" },
     { path: "/courses/arabic", label: "Arabic Language" },
     { path: "/courses/hifz", label: "Hifz (Memorization)" },
@@ -30,10 +31,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-heading font-bold text-xl">Q</span>
-            </div>
-            <span className="font-heading font-bold text-xl text-primary">QuranLearn</span>
+            <img src="/logo.png" alt="QuranAcademy Logo" className="w-10 h-10 object-contain" />
+            <span className="font-heading font-bold text-xl text-primary">QuranAcademy</span>
           </Link>
 
           {/* Desktop Navigation */}

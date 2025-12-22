@@ -15,9 +15,11 @@ const Index = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
-    "name": "QuranLearn",
-    "description": "Learn Quran online with expert tutors. Offering Tajweed, Hifz, Arabic, and Quran recitation courses for all ages.",
-    "url": "https://quranlearn.com",
+    "name": "QuranAcademy",
+    "alternateName": "Quran Academy Online",
+    "description": "The #1 Online Quran Academy. Learn Quran online with certified tutors. Offering Noorani Qaida, Tajweed, Hifz, Arabic, and Quran recitation courses for kids & adults worldwide.",
+    "url": "https://quranacademy.com",
+    "logo": "https://quranacademy.com/logo.png",
     "telephone": "+923334136071",
     "address": {
       "@type": "PostalAddress",
@@ -29,34 +31,77 @@ const Index = () => {
     ],
     "offers": {
       "@type": "Offer",
-      "description": "Free 30-minute trial lesson",
+      "description": "Free 30-minute trial lesson - Learn Quran Online",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "10000",
+      "bestRating": "5"
     }
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do online Quran classes work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our online Quran classes are conducted via Zoom or Skype. You'll have one-on-one sessions with a certified tutor at your preferred time. All you need is a device with internet connection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Noorani Qaida?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Noorani Qaida is the foundational course for learning to read the Quran. It teaches Arabic alphabets, pronunciation, and basic reading rules. It's perfect for complete beginners."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer a free trial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! We offer a completely free 30-minute trial lesson with no obligation. This helps you experience our teaching method and meet your tutor before enrolling."
+        }
+      }
+    ]
   };
 
   return (
     <>
       <Helmet>
-        <title>Learn Quran Online | Expert Tutors | QuranLearn</title>
-        <meta name="description" content="Learn Quran online from certified tutors. Online Quran classes for Tajweed, Hifz, Arabic & Recitation. Free trial lesson. Flexible schedule. All ages welcome." />
-        <meta name="keywords" content="learn quran online, online quran classes, quran tutor, tajweed classes, hifz online, arabic learning, quran recitation, islamic education" />
-        <link rel="canonical" href="https://quranlearn.com" />
+        <title>Learn Quran Online | #1 Online Quran Academy | QuranAcademy.com</title>
+        <meta name="description" content="Learn Quran online from certified tutors. Online Quran classes for kids & adults - Noorani Qaida, Tajweed, Hifz, Arabic & Recitation. Free trial lesson. 24/7 flexible schedule. Join 10,000+ students worldwide!" />
+        <meta name="keywords" content="learn quran online, online quran classes, quran tutor, tajweed classes, hifz online, arabic learning, quran recitation, islamic education, noorani qaida online, quran for kids, quran for beginners, online quran academy, quran memorization course" />
+        <link rel="canonical" href="https://quranacademy.com" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Learn Quran Online | Expert Tutors | QuranLearn" />
-        <meta property="og:description" content="Learn Quran online from certified tutors. Free trial lesson. Flexible schedule. All ages welcome." />
+        <meta property="og:title" content="Learn Quran Online | #1 Online Quran Academy | Free Trial" />
+        <meta property="og:description" content="Join 10,000+ students learning Quran online. Noorani Qaida, Tajweed, Hifz, Arabic courses with certified tutors. Free trial available!" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://quranlearn.com" />
+        <meta property="og:url" content="https://quranacademy.com" />
+        <meta property="og:image" content="/logo.png" />
+        <meta property="og:site_name" content="QuranAcademy" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Learn Quran Online | QuranLearn" />
-        <meta name="twitter:description" content="Learn Quran online from certified tutors. Free trial lesson available." />
+        <meta name="twitter:title" content="Learn Quran Online | #1 Online Quran Academy" />
+        <meta name="twitter:description" content="Join 10,000+ students learning Quran online. Free trial lesson available!" />
+        <meta name="twitter:image" content="/logo.png" />
         
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
         </script>
       </Helmet>
 
