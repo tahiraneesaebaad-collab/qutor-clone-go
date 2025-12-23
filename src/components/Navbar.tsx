@@ -31,14 +31,14 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 p-0.5 shadow-sm">
+            <div className="relative w-14 h-14 flex items-center justify-center">
               <img 
                 src="/logo.png" 
                 alt="QuranAcademy Logo" 
-                className="w-full h-full object-cover rounded-full"
+                className="w-full h-full object-contain drop-shadow-md"
               />
             </div>
-            <span className="font-heading font-bold text-xl text-primary hidden sm:block">QuranAcademy</span>
+            <span className="font-heading font-extrabold text-2xl text-primary hidden sm:block tracking-tight">QuranAcademy</span>
           </Link>
 
           {/* Desktop Navigation */}
