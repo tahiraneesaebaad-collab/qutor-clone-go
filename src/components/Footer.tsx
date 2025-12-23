@@ -10,9 +10,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div>
-            <Link to="/" className="flex items-center gap-3 mb-4">
-              <img src="/logo.png" alt="QuranAcademy Logo" className="w-14 h-14 object-contain brightness-0 invert" />
-              <span className="font-heading font-extrabold text-2xl">QuranAcademy</span>
+            <Link to="/" className="flex items-center gap-2 mb-4">
+              <img src="/logo.png" alt="QuranAcademy Logo" className="w-10 h-10 object-contain rounded-full" />
+              <span className="font-heading font-bold text-xl">QuranAcademy</span>
             </Link>
             <p className="text-primary-foreground/80 mb-6">
               Learn Quran online from certified tutors. Flexible schedules, personalized lessons,
