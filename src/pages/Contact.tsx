@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import { Mail, Phone, MapPin, Clock, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, MessageCircle, ChevronDown, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,38 +9,132 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwfC44ke5LZL9nnEoHZ5A0lO9h1s-DAAsPlHJYHAf3WfOhPd5OkvTZUA8f1sxTIN1tHVw/exec";
+
+const countryCodes = [
+  { code: "+1", country: "US/CA", flag: "🇺🇸" },
+  { code: "+44", country: "UK", flag: "🇬🇧" },
+  { code: "+92", country: "PK", flag: "🇵🇰" },
+  { code: "+91", country: "IN", flag: "🇮🇳" },
+  { code: "+971", country: "UAE", flag: "🇦🇪" },
+  { code: "+966", country: "SA", flag: "🇸🇦" },
+  { code: "+965", country: "KW", flag: "🇰🇼" },
+  { code: "+974", country: "QA", flag: "🇶🇦" },
+  { code: "+973", country: "BH", flag: "🇧🇭" },
+  { code: "+968", country: "OM", flag: "🇴🇲" },
+  { code: "+60", country: "MY", flag: "🇲🇾" },
+  { code: "+62", country: "ID", flag: "🇮🇩" },
+  { code: "+880", country: "BD", flag: "🇧🇩" },
+  { code: "+27", country: "ZA", flag: "🇿🇦" },
+  { code: "+49", country: "DE", flag: "🇩🇪" },
+  { code: "+33", country: "FR", flag: "🇫🇷" },
+  { code: "+39", country: "IT", flag: "🇮🇹" },
+  { code: "+34", country: "ES", flag: "🇪🇸" },
+  { code: "+31", country: "NL", flag: "🇳🇱" },
+  { code: "+61", country: "AU", flag: "🇦🇺" },
+  { code: "+64", country: "NZ", flag: "🇳🇿" },
+  { code: "+90", country: "TR", flag: "🇹🇷" },
+  { code: "+20", country: "EG", flag: "🇪🇬" },
+  { code: "+212", country: "MA", flag: "🇲🇦" },
+  { code: "+234", country: "NG", flag: "🇳🇬" },
+];
+
+const studentCounts = [
+  { value: "1", label: "1 Student" },
+  { value: "2", label: "2 Students" },
+  { value: "3", label: "3 Students" },
+  { value: "4", label: "4 Students" },
+  { value: "5+", label: "5+ Students" },
+];
+
 const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    name: "",
+    studentName: "",
     email: "",
-    phone: "",
+    countryCode: "+92",
+    whatsappNumber: "",
+    numberOfStudents: "1",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCountrySelect = (code: string) => {
+    setFormData((prev) => ({ ...prev, countryCode: code }));
+    setShowCountryDropdown(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission - in production, this would send to a backend
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Validate WhatsApp number (only digits)
+    const cleanNumber = formData.whatsappNumber.replace(/\D/g, '');
+    if (cleanNumber.length < 8 || cleanNumber.length > 15) {
+      toast({
+        title: "Invalid WhatsApp Number",
+        description: "Please enter a valid WhatsApp number (8-15 digits)",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you soon. You can also reach us on WhatsApp for faster response.",
-    });
+    const submissionData = {
+      studentName: formData.studentName.trim(),
+      email: formData.email.trim(),
+      whatsappNumber: `${formData.countryCode}${cleanNumber}`,
+      numberOfStudents: formData.numberOfStudents,
+      message: formData.message.trim(),
+      submittedAt: new Date().toISOString(),
+      source: "QuranAcademy Contact Form",
+    };
 
-    setFormData({ name: "", email: "", phone: "", message: "" });
-    setIsSubmitting(false);
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", // Google Apps Script requires no-cors
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+      // Since no-cors doesn't return readable response, we assume success
+      toast({
+        title: "Message Sent Successfully! ✅",
+        description: "We'll contact you on WhatsApp soon. JazakAllah Khair!",
+      });
+
+      setFormData({
+        studentName: "",
+        email: "",
+        countryCode: "+92",
+        whatsappNumber: "",
+        numberOfStudents: "1",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast({
+        title: "Submission Failed",
+        description: "Please try again or contact us directly on WhatsApp.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const selectedCountry = countryCodes.find(c => c.code === formData.countryCode);
 
   const contactInfo = [
     {
@@ -164,21 +258,24 @@ const Contact = () => {
                     Send Us a Message
                   </h2>
 
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    {/* Student Name */}
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                        Full Name *
+                      <label htmlFor="studentName" className="block text-sm font-medium text-foreground mb-2">
+                        Student Name *
                       </label>
                       <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
+                        id="studentName"
+                        name="studentName"
+                        value={formData.studentName}
                         onChange={handleChange}
-                        placeholder="Your full name"
+                        placeholder="Enter student's name"
                         required
+                        className="bg-background"
                       />
                     </div>
 
+                    {/* Email */}
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                         Email Address *
@@ -191,23 +288,85 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="your.email@example.com"
                         required
+                        className="bg-background"
                       />
                     </div>
 
+                    {/* WhatsApp Number with Country Code */}
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-                        Phone / WhatsApp Number
+                      <label htmlFor="whatsappNumber" className="block text-sm font-medium text-foreground mb-2">
+                        WhatsApp Number * <span className="text-muted-foreground text-xs">(We'll contact you here)</span>
                       </label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+1 234 567 8900"
-                      />
+                      <div className="flex gap-2">
+                        {/* Country Code Selector */}
+                        <div className="relative">
+                          <button
+                            type="button"
+                            onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                            className="flex items-center gap-1 h-10 px-3 rounded-md border border-input bg-background text-sm font-medium hover:bg-muted transition-colors min-w-[100px]"
+                          >
+                            <span className="text-lg">{selectedCountry?.flag}</span>
+                            <span>{formData.countryCode}</span>
+                            <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                          </button>
+                          
+                          {showCountryDropdown && (
+                            <div className="absolute top-full left-0 mt-1 w-48 max-h-60 overflow-y-auto bg-background border border-border rounded-lg shadow-lg z-50">
+                              {countryCodes.map((country) => (
+                                <button
+                                  key={country.code}
+                                  type="button"
+                                  onClick={() => handleCountrySelect(country.code)}
+                                  className={`w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-muted transition-colors ${
+                                    formData.countryCode === country.code ? 'bg-primary/10 text-primary' : ''
+                                  }`}
+                                >
+                                  <span className="text-lg">{country.flag}</span>
+                                  <span>{country.country}</span>
+                                  <span className="text-muted-foreground ml-auto">{country.code}</span>
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Phone Number Input */}
+                        <Input
+                          id="whatsappNumber"
+                          name="whatsappNumber"
+                          type="tel"
+                          value={formData.whatsappNumber}
+                          onChange={handleChange}
+                          placeholder="3334136071"
+                          required
+                          className="flex-1 bg-background"
+                        />
+                      </div>
                     </div>
 
+                    {/* Number of Students */}
+                    <div>
+                      <label htmlFor="numberOfStudents" className="block text-sm font-medium text-foreground mb-2">
+                        <Users className="w-4 h-4 inline mr-1" />
+                        Number of Students *
+                      </label>
+                      <select
+                        id="numberOfStudents"
+                        name="numberOfStudents"
+                        value={formData.numberOfStudents}
+                        onChange={handleChange}
+                        required
+                        className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                      >
+                        {studentCounts.map((count) => (
+                          <option key={count.value} value={count.value}>
+                            {count.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Message */}
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                         Message *
@@ -217,15 +376,27 @@ const Contact = () => {
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        placeholder="Tell us about your learning goals..."
-                        rows={5}
+                        placeholder="Tell us about your learning goals, preferred schedule, or any questions..."
+                        rows={4}
                         required
+                        className="bg-background"
                       />
                     </div>
 
                     <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                      {isSubmitting ? "Sending..." : "Send Message"}
+                      {isSubmitting ? (
+                        <>
+                          <span className="animate-spin mr-2">⏳</span>
+                          Sending...
+                        </>
+                      ) : (
+                        "Send Message"
+                      )}
                     </Button>
+
+                    <p className="text-xs text-muted-foreground text-center">
+                      Your information is secure and will only be used to contact you about Quran classes.
+                    </p>
                   </form>
                 </div>
               </div>
