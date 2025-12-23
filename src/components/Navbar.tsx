@@ -30,9 +30,15 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <img src="/logo.png" alt="QuranAcademy Logo" className="w-10 h-10 object-contain" />
-            <span className="font-heading font-bold text-xl text-primary">QuranAcademy</span>
+          <Link to="/" className="flex items-center gap-3">
+            <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 p-0.5 shadow-sm">
+              <img 
+                src="/logo.png" 
+                alt="QuranAcademy Logo" 
+                className="w-full h-full object-cover rounded-full"
+              />
+            </div>
+            <span className="font-heading font-bold text-xl text-primary hidden sm:block">QuranAcademy</span>
           </Link>
 
           {/* Desktop Navigation */}
